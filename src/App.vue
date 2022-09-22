@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <MarcaJulius />
+    <HeaderJulius />
+    <div class="container">
+      <PainelLancamentos />
+      <PainelResumo />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PainelLancamentos from './components/PainelLancamentos.vue'
+import PainelResumo from './components/PainelResumo.vue'
+import HeaderJulius from './components/HeaderJulius.vue'
+import MarcaJulius from "./components/MarcaJulius.vue"
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: { MarcaJulius, HeaderJulius, PainelResumo, PainelLancamentos }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+@font-face {
+  font-family: "padrao";
+  src: url(./fonts/KumbhSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "negrito";
+  src: url(./fonts/KumbhSans-Bold.ttf);
+}
+
+:root {
+  --cor-destaque: #5333ed;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dddddd;
+}
+
+.container {
+  display: flex;
+  padding: 20px;
 }
 </style>
