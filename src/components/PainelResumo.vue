@@ -11,19 +11,22 @@
       </span>
     </div>
 
-    <div class="graficoComportamento">
-      <canvas></canvas>
-    </div>
+    <GraficoComportamento />
+    
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import GraficoComportamento from '../components/GraficoComportamento.vue'
 
 export default {
     name: "PainelResumo",
     computed: mapGetters(["dinheiroEmCaixa"]),
     methods: mapActions(["atualizarCaixa"]),
+    components: {
+      GraficoComportamento,
+    },
     created() {
       this.atualizarCaixa()
     }
