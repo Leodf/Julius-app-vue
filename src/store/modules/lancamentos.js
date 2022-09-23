@@ -31,7 +31,11 @@ const moduloLancamentos = {
             commit("adicionarLancamento", lancamento)
             commit("calcularCaixa")
         },
-        atualizarCaixa: ({ commit }) => commit('calcularCaixa')
+        atualizarCaixa: ({ commit }) => commit('calcularCaixa'),
+        excluirLancamento: ({ commit }, id) => {
+            commit('removerLancamento', id)
+            commit('calcularCaixa')
+        }
     },
     mutations: {
         adicionarLancamento: (state, lancamento) => state.lancamentos.unshift(lancamento),
@@ -43,7 +47,11 @@ const moduloLancamentos = {
                     .reduce((soma, valor) => soma + valor)
                 : 0
             state.caixa = caixa
-        }
+        },
+        removerLancamento: 
+            (state, id) => 
+                state.lancamentos = 
+                    state.lancamentos.filter(lancamento => lancamento.id !== id)
     }
 }
 

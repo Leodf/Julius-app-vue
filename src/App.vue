@@ -47,4 +47,13 @@ body {
   display: flex;
   padding: 20px;
 }
+
+.entrada {
+    color: #22a7f0;
+}
+
+.saida {
+    color: red;
+}
+
 </style>
