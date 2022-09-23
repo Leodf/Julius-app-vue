@@ -6,7 +6,7 @@
             <div class="tiposLancamento">
                 <input type="radio" name="tipo" id="entrada">
                 <label for="entrada">Entrada</label>
-                <input type="radio" name="tipo" id="saida">
+                <input type="radio" name="tipo" id="saida" checked>
                 <label for="saida">Saída</label>
             </div>
 
