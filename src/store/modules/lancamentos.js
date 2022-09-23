@@ -20,7 +20,7 @@ const moduloLancamentos = {
                 data: '2022-09-20'
             },
         ],
-        caixa: 0
+        caixa: 500
     },
     getters: {
         todosLancamentos: state => state.lancamentos,

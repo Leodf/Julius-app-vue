@@ -4,50 +4,43 @@
         
         <form>
             <div class="tiposLancamento">
-                <input type="radio" name="tipo" id="entrada">
+                <input type="radio" name="tipo" id="entrada" value="entrada">
                 <label for="entrada">Entrada</label>
-                <input type="radio" name="tipo" id="saida" checked>
+                <input type="radio" name="tipo" id="saida" value="saida" checked>
                 <label for="saida">Saída</label>
             </div>
 
             <label for="valor">Valor</label>
-            <input type="number" name="valor" id="valor">
+            <input type="number" min="0" step="0.01" name="valor" id="valor" required>
             <label for="descricao">Descrição</label>
-            <input type="text" name="descricao" id="descricao">
+            <input type="text" name="descricao" id="descricao" required>
             <label for="data">Data</label>
-            <input type="date" name="data" id="data">
+            <input type="date" name="data" id="data" required>
 
             <button>Lançar</button>
         </form>
     </div>
 
     <div class="areaLancamentos">
-        <BlocoLancamento tipo="entrada" :lancamento="{
-            valor: 100,
-            descricao: 'Venda de HQ',
-            data: '2020-10-20',
-        }" />
-        <BlocoLancamento tipo="saida" :lancamento="{
-            valor: 50,
-            descricao: 'Despesa Mercado',
-            data: '2020-10-18',
-        }" />
-        <BlocoLancamento tipo="saida" :lancamento="{
-            valor: 10,
-            descricao: 'Despesa Farmacia',
-            data: '2020-10-18',
-        }" />
+        <BlocoLancamento
+            v-for="lancamento in todosLancamentos"
+            v-bind:key="lancamento.id"
+            :tipo="lancamento.valor > 0 ? 'entrada' : 'saida'"
+            :lancamento="lancamento" 
+        />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import BlocoLancamento from './BlocoLancamento.vue'
 export default {
     name: "PainelLancamentos",
     components: {
         BlocoLancamento,
-    }
+    },
+    computed: mapGetters(['todosLancamentos'])
 }
 </script>
 

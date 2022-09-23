@@ -2,7 +2,7 @@
   <div class="painelResumo">
     <div class="resumoCaixa">
       <span class="fraseResumo">Dinheiro em caixa</span>
-      <span class="caixa">R$ 0</span>
+      <span class="caixa">R$ {{ dinheiroEmCaixa }}</span>
     </div>
 
     <div class="graficoComportamento">
@@ -12,8 +12,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     name: "PainelResumo",
+    computed: mapGetters(["dinheiroEmCaixa"])
 }
 </script>
 
