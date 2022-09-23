@@ -16,7 +16,10 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: "PainelResumo",
-    computed: mapGetters(["dinheiroEmCaixa"])
+    computed: mapGetters(["dinheiroEmCaixa"]),
+    created() {
+
+    }
 }
 </script>
 

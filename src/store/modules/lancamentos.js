@@ -26,8 +26,25 @@ const moduloLancamentos = {
         todosLancamentos: state => state.lancamentos,
         dinheiroEmCaixa: state => state.caixa
     },
-    actions: {},
-    mutations: {}
+    actions: {
+        salvarLancamento: ({ commit }, lancamento) => {
+            commit("adicionarLancamento", lancamento)
+            commit("calcularCaixa")
+        },
+        atualizarCaixa: ({ commit }) => commit('calcularCaixa')
+    },
+    mutations: {
+        adicionarLancamento: (state, lancamento) => state.lancamentos.unshift(lancamento),
+        calcularCaixa: state => {
+            const caixa = 
+                state.lancamentos.length > 0
+                ? state.lancamentos
+                    .map(lancamento => lancamento.valor)
+                    .reduce((soma, valor) => soma + valor)
+                : 0
+            state.caixa = caixa
+        }
+    }
 }
 
 export default moduloLancamentos

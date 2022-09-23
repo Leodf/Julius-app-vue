@@ -2,20 +2,20 @@
   <div class="painelLancamento">
     <div class="formularioLancamento">
         
-        <form>
+        <form @submit="salvar">
             <div class="tiposLancamento">
-                <input type="radio" name="tipo" id="entrada" value="entrada">
+                <input type="radio" name="tipo" id="entrada" value="entrada" v-model="tipo">
                 <label for="entrada">Entrada</label>
-                <input type="radio" name="tipo" id="saida" value="saida" checked>
+                <input type="radio" name="tipo" id="saida" value="saida" v-model="tipo">
                 <label for="saida">Saída</label>
             </div>
 
             <label for="valor">Valor</label>
-            <input type="number" min="0" step="0.01" name="valor" id="valor" required>
+            <input type="number" min="0" step="0.01" name="valor" id="valor" v-model.number="valor" required>
             <label for="descricao">Descrição</label>
-            <input type="text" name="descricao" id="descricao" required>
+            <input type="text" name="descricao" id="descricao" v-model="descricao" required>
             <label for="data">Data</label>
-            <input type="date" name="data" id="data" required>
+            <input type="date" name="data" id="data" v-model="data" required>
 
             <button>Lançar</button>
         </form>
@@ -33,14 +33,42 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import BlocoLancamento from './BlocoLancamento.vue'
+import Lancamento from '../models/Lancamento'
+
 export default {
     name: "PainelLancamentos",
+    data: () => {
+        return {
+            tipo: "saida", // elimina o checked no botao radio pois fica valor padrao
+            valor: undefined,
+            descricao: "",
+            data: "",
+        }
+    },
     components: {
         BlocoLancamento,
     },
-    computed: mapGetters(['todosLancamentos'])
+    computed: mapGetters(["todosLancamentos"]),
+    methods: {
+        ...mapActions(["salvarLancamento"]),
+        salvar(event) {
+            event.preventDefault()
+            if (this.tipo === 'saida') {
+                this.valor *= -1
+            }
+            const lancamento = new Lancamento(this.valor, this.descricao, this.data)
+            this.salvarLancamento(lancamento)
+            this.limparFormulario()
+        },
+        limparFormulario() {
+            this.tipo = "saida"
+            this.valor = undefined
+            this.descricao = ""
+            this.data = ""
+        },
+    },
 }
 </script>
 
